@@ -33,7 +33,7 @@
 
     body {
       min-height:100vh;
-      background:var(--bg);
+      background:radial-gradient(120% 70% at 50% -10%, #FFE3D1 0%, #FAEFE6 45%, #F6EFE9 100%) fixed, var(--bg);
       color:var(--ink);
       font-family:"DM Sans",system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
       overflow-x:hidden;
@@ -879,8 +879,9 @@
     }
 
     .game-badge.open {
-      background: #f0fdf4;
-      color: #15803d;
+      background: #FCF1DC;
+      border: 1px solid #F0D9AE;
+      color: #A36D1C;
       display: inline-block;
     }
 
@@ -948,36 +949,33 @@
     .prob-row {
       display:grid;
       grid-template-columns:1fr 1fr 1fr;
-      border:1px solid var(--line);
-      border-radius:10px;
-      overflow:hidden;
-      margin-bottom:12px;
+      background:#F6EFE8;
+      border-radius:999px;
+      padding:5px;
+      gap:4px;
+      margin-bottom:4px;
     }
 
     .prob {
       min-height:82px;
-      padding:8px 4px;
+      padding:10px 4px 8px;
       display:grid;
       place-items:center;
       text-align:center;
-      border-right:1px solid var(--line);
+      border-radius:999px;
     }
-
-    .prob:last-child { border-right:0; }
 
     .prob.active {
-      background:#f0fdf6;
+      background:#fff;
       position:relative;
       z-index:1;
+      box-shadow:0 2px 10px rgba(61,153,96,0.25), inset 0 0 0 1.5px #3D9960;
     }
-
-    .prob:first-child.active { border-radius:10px 0 0 10px; outline:2px solid var(--green); outline-offset:-2px; }
-    .prob:last-child.active { border-radius:0 10px 10px 0; outline:2px solid var(--green); outline-offset:-2px; }
-    .prob:not(:first-child):not(:last-child).active { outline:2px solid var(--green); outline-offset:-2px; }
 
     .prob.active .pct { color:#087443; }
 
     .insight {
+      display:none;
       min-height:34px;
       display:flex;
       align-items:center;
@@ -1005,11 +1003,67 @@
     }
 
     .team-code {
-      font-size:10px;
-      color:#344054;
-      font-weight:900;
+      font-size:9.5px;
+      color:#8A8F98;
+      font-weight:800;
       text-transform:uppercase;
+      letter-spacing:0.3px;
+      line-height:1.25;
+      word-break:break-word;
     }
+    .prob.active .team-code { color:#1E2530; }
+    .flag.draw-eq {
+      font-size:19px;
+      font-weight:900;
+      color:#B0742E;
+      padding-top:5px;
+      margin-bottom:6px;
+    }
+    .crowd-caption {
+      text-align:right;
+      color:#A6AAB2;
+      font-size:11px;
+      margin:0 4px 12px;
+    }
+    .ppill {
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background:#F6EFE8;
+      border-radius:999px;
+      padding:6px 14px 6px 7px;
+      max-width:100%;
+      font-size:13.5px;
+      font-weight:800;
+      color:#4A4F58;
+    }
+    .ppill .pedge {
+      width:5px;
+      align-self:stretch;
+      border-radius:999px;
+      min-height:24px;
+      flex-shrink:0;
+    }
+    .ppill .pface {
+      width:28px;
+      height:28px;
+      border-radius:999px;
+      background:#EBE2D8;
+      border:1.5px solid #DCCFC0;
+      color:#8A8F98;
+      font-size:10px;
+      font-weight:800;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-shrink:0;
+      overflow:hidden;
+    }
+    .ppill .pface img { width:100%; height:100%; object-fit:cover; border-radius:999px; }
+    .ppill .pval { min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .ppill.won { background:#E3F4E9; color:#2E7A4C; }
+    .ppill.lost { background:#FBEAE6; color:#B04A36; }
+    .tap-hint { text-align:center; color:#A6AAB2; font-size:11.5px; margin-top:9px; }
 
     .pick-label {
       color:#111827;
@@ -1068,10 +1122,10 @@
       align-items:center;
       font-size:12px;
       font-weight:900;
-      border:1px solid #dfe4ec;
-      border-radius:10px;
-      padding:7px 9px;
-      background:#fff;
+      border:1.5px solid transparent;
+      border-radius:999px;
+      padding:7px 12px 7px 7px;
+      background:#F6EFE8;
       text-align:left;
       transition:.15s ease;
     }
@@ -1079,9 +1133,9 @@
 
 
     .scorer.active {
-      border-color:#37b977;
-      background:#f0fdf6;
-      box-shadow:inset 0 0 0 1px #37b977;
+      border-color:transparent;
+      background:#fff;
+      box-shadow:0 2px 10px rgba(61,153,96,0.22), inset 0 0 0 1.5px #3D9960;
     }
 
     .headshot {
@@ -1110,7 +1164,7 @@
       display:grid;
       place-items:center;
       color:#fff;
-      background:var(--orange);
+      background:#3D9960;
       font-size:13px;
       font-weight:900;
       opacity:0;
@@ -1751,7 +1805,7 @@
         grid-template-columns:repeat(3,1fr);
       }
 
-      .scorer { grid-template-columns:42px 1fr 42px 22px; min-height:48px; padding:7px 8px; border-radius:10px; }
+      .scorer { grid-template-columns:42px 1fr 42px 22px; min-height:48px; padding:7px 10px 7px 7px; border-radius:999px; }
       .headshot { width:38px; height:38px; font-size:10px; }
 
       .scorer-name {
@@ -2228,24 +2282,20 @@
         <!-- White stat row with icons -->
         <div class="history-stat-row">
           <div class="history-stat-cell">
-            <span class="history-stat-icon">👑</span>
             <strong id="historyRank">—</strong>
             <span>Rank</span>
           </div>
           <div class="history-stat-cell">
-            <span class="history-stat-icon">⭐</span>
             <strong id="historyPoints">0</strong>
             <span>Pts</span>
           </div>
           <div class="history-stat-cell">
-            <span class="history-stat-icon">🎯</span>
             <strong id="summaryCorrect">0%</strong>
-            <span>Winner</span>
+            <span>Match Winner</span>
           </div>
           <div class="history-stat-cell">
-            <span class="history-stat-icon">⚽</span>
             <strong id="summaryRate">0%</strong>
-            <span>Scorer</span>
+            <span>Goalscorer</span>
           </div>
         </div>
       </div>
@@ -2531,28 +2581,33 @@
     }
 
      function renderPickRow(p) {
-       var dotColor = p.status==='hit' ? '#16a34a' : p.status==='partial' ? '#d97706' : p.status==='miss' ? '#dc2626' : '#d97706';
-       var ptsBg    = p.status==='hit' ? '#16a34a' : p.status==='partial' ? '#d97706' : p.status==='miss' ? '#dc2626' : 'transparent';
-       var ptsBorder = ptsBg==='transparent' ? '1px solid #e4e7ec' : 'none';
-       var ptsColor  = ptsBg==='transparent' ? '#9ca3af' : '#fff';
+       var dotColor = p.status==='hit' ? '#16a34a' : p.status==='partial' ? '#d97706' : p.status==='miss' ? '#dc2626' : '#E8902C';
+       var ptsBg    = p.status==='hit' ? '#E3F4E9' : p.status==='partial' ? '#FCF1DC' : p.status==='miss' ? '#FBEAE6' : '#F4EBE2';
+       var ptsColor  = p.status==='hit' ? '#2E7A4C' : p.status==='partial' ? '#A36D1C' : p.status==='miss' ? '#B04A36' : '#A6AAB2';
        var ptsNum    = p.points === '—' ? '—' : p.points;
        var dateStr   = p.matchDetail.includes('·') ? p.matchDetail.split('·').pop().trim() : p.matchDetail;
-       var statusStr = p.status==='pending' ? 'Pending' : p.matchDetail.includes('·') ? p.matchDetail.split('·')[0].trim() : '';
+       var scoreStr  = (p.status!=='pending' && p.matchDetail.includes('·')) ? p.matchDetail.split('·')[0].trim() : '';
        var late      = p.isLate ? ' <span style="font-size:10px;color:#ef4444;">[LATE]</span>' : '';
-       return '<div style="background:#fff;border:1px solid #e4e7ec;border-radius:12px;padding:10px 12px;">' +
-         '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">' +
-           '<div style="display:flex;align-items:center;gap:7px;">' +
-             '<div style="width:8px;height:8px;border-radius:999px;background:' + dotColor + ';flex-shrink:0;"></div>' +
-             '<span style="font-size:13px;font-weight:900;color:#101828;">' + esc(p.matchTitle) + late + '</span>' +
+       var wCls = p.status==='pending' ? '' : (p.wPre==='✓' ? ' won' : ' lost');
+       var sCls = p.status==='pending' ? '' : (p.sPre==='✓' ? ' won' : ' lost');
+       var wMark = p.status!=='pending' ? p.wPre+' ' : '';
+       var sMark = p.status!=='pending' ? p.sPre+' ' : '';
+       var scorePill = scoreStr && scoreStr !== 'Final' ? '<span style="font-size:11px;font-weight:800;color:#6B7280;background:#F4EBE2;border-radius:999px;padding:2px 9px;">' + esc(scoreStr) + '</span>' : '';
+       return '<div style="background:#fff;border:1px solid #F0E7DC;border-radius:16px;padding:11px 13px;box-shadow:0 3px 12px rgba(180,95,50,0.06);">' +
+         '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:6px;">' +
+           '<div style="display:flex;align-items:center;gap:7px;min-width:0;">' +
+             (p.status==='pending' ? '<div style="width:8px;height:8px;border-radius:999px;background:' + dotColor + ';flex-shrink:0;"></div>' : '') +
+             '<span style="font-size:13.5px;font-weight:900;color:#101828;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + esc(p.matchTitle) + late + '</span>' +
            '</div>' +
-           '<div style="display:flex;align-items:center;gap:6px;">' +
-             '<span style="font-size:11px;color:#6b7280;">' + dateStr + '</span>' +
-             '<span style="background:' + ptsBg + ';color:' + ptsColor + ';border:' + ptsBorder + ';border-radius:999px;padding:2px 8px;font-size:11px;font-weight:800;">' + ptsNum + '</span>' +
+           '<div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">' +
+             scorePill +
+             '<span style="font-size:11px;color:#A6AAB2;">' + dateStr + '</span>' +
+             '<span style="background:' + ptsBg + ';color:' + ptsColor + ';border-radius:999px;padding:2px 9px;font-size:11px;font-weight:800;">' + ptsNum + '</span>' +
            '</div>' +
          '</div>' +
-         '<div style="display:flex;gap:6px;">' +
-           '<span style="background:' + p.wBg + ';color:' + p.wColor + ';border-radius:8px;padding:4px 10px;font-size:12px;font-weight:700;">' + (p.status!=='pending' ? p.wPre+' ' : '') + p.wFlag + ' ' + esc(p.wLabel) + '</span>' +
-           '<span style="background:' + p.sBg + ';color:' + p.sColor + ';border-radius:8px;padding:4px 10px;font-size:12px;font-weight:700;">' + (p.status!=='pending' ? p.sPre+' ' : '') + '⚽ ' + esc(p.sLabel) + '</span>' +
+         '<div style="display:flex;gap:7px;">' +
+           '<span class="ppill' + wCls + '" style="flex:1;min-width:0;"><span class="pedge" style="background:' + teamEdge(p.wLabel) + ';"></span><span class="pval">' + wMark + esc(p.wLabel) + '</span></span>' +
+           '<span class="ppill' + sCls + '" style="flex:1;min-width:0;">' + facePillHTML(p.sLabel) + '<span class="pval">' + sMark + esc(p.sLabel) + '</span></span>' +
          '</div>' +
        '</div>';
      }
@@ -2576,7 +2631,10 @@
       $("#historyTitle").textContent = `${name}’s History`;
       if ($("#historyLogin")) $("#historyLogin").textContent = login;
       if ($("#historySubtitle")) $("#historySubtitle").textContent = login;
-      if ($("#historyRank")) $("#historyRank").textContent = rank > 0 ? `#${rank}` : "#—";
+      if ($("#historyRank")) {
+        $("#historyRank").textContent = rank > 0 ? `#${rank}` : "#—";
+        $("#historyRank").style.color = (rank > 0 && rank <= 3) ? "#B8863B" : "";
+      }
       if ($("#historyRankNote")) $("#historyRankNote").textContent = `${trendText(delta)} this week`;
       if ($("#historyPoints")) $("#historyPoints").textContent = num(row.Overall);
       if ($("#historyPointsNote")) $("#historyPointsNote").textContent = `+${activeWeekPts} this week`;
@@ -2620,8 +2678,10 @@
           // Update summary stats
           const winnerAcc = Math.round(history.filter(h=>h.finished&&h.winnerCorrect).length/(history.filter(h=>h.finished).length||1)*100);
           const scorerAcc = Math.round(history.filter(h=>h.finished&&h.scorerCorrect).length/(history.filter(h=>h.finished).length||1)*100);
-          if ($("#summaryCorrect")) $("#summaryCorrect").textContent = winnerAcc + "%";
-          if ($("#summaryRate"))    $("#summaryRate").textContent    = scorerAcc + "%";
+          const finishedCt = history.filter(h=>h.finished).length;
+          function accColor(v) { return finishedCt === 0 ? "" : v >= 60 ? "#2E7A4C" : v >= 40 ? "#B8863B" : "#A6AAB2"; }
+          if ($("#summaryCorrect")) { $("#summaryCorrect").textContent = winnerAcc + "%"; $("#summaryCorrect").style.color = accColor(winnerAcc); }
+          if ($("#summaryRate"))    { $("#summaryRate").textContent    = scorerAcc + "%"; $("#summaryRate").style.color = accColor(scorerAcc); }
           if ($("#summaryPoints"))  $("#summaryPoints").textContent  = "+" + totalPts;
           if ($("#historyAccuracyNote")) $("#historyAccuracyNote").textContent = rate2 + "% accuracy";
 
@@ -2839,6 +2899,90 @@
       return schedule.map(s => ({ ...(map.get(`${s.Date}|${s.Home}|${s.Away}`) || {}), ...s }));
     }
 
+    // National flag colors for the picked-team edge (2-3 blocks per team)
+    const TEAM_COLORS = {
+      "mexico": ["#006847","#DDD9D2","#CE1126"],
+      "south africa": ["#007A4D","#FFB612","#001489"],
+      "south korea": ["#CD2E3A","#DDD9D2","#0047A0"],
+      "czechia": ["#D7141A","#DDD9D2","#11457E"],
+      "canada": ["#D80621","#DDD9D2","#D80621"],
+      "bosnia and herzegovina": ["#002395","#FECB00"],
+      "qatar": ["#8A1538","#DDD9D2"],
+      "switzerland": ["#D52B1E","#DDD9D2"],
+      "brazil": ["#009C3B","#FFDF00","#002776"],
+      "morocco": ["#C1272D","#006233"],
+      "haiti": ["#00209F","#D21034"],
+      "scotland": ["#005EB8","#DDD9D2"],
+      "united states": ["#B22234","#DDD9D2","#3C3B6E"],
+      "paraguay": ["#D52B1E","#DDD9D2","#0038A8"],
+      "australia": ["#FFCD00","#00843D"],
+      "turkiye": ["#E30A17","#DDD9D2"],
+      "germany": ["#000000","#DD0000","#FFCE00"],
+      "curacao": ["#002B7F","#F9E814"],
+      "ivory coast": ["#F77F00","#DDD9D2","#009A44"],
+      "ecuador": ["#FFDD00","#034EA2","#ED1C24"],
+      "netherlands": ["#FF6F00","#DDD9D2","#21468B"],
+      "japan": ["#DDD9D2","#BC002D","#DDD9D2"],
+      "sweden": ["#006AA7","#FECC02"],
+      "tunisia": ["#E70013","#DDD9D2"],
+      "belgium": ["#000000","#FDDA24","#EF3340"],
+      "egypt": ["#CE1126","#DDD9D2","#000000"],
+      "iran": ["#239F40","#DDD9D2","#DA0000"],
+      "new zealand": ["#000000","#DDD9D2"],
+      "spain": ["#AA151B","#F1BF00","#AA151B"],
+      "cape verde": ["#003893","#CF2027","#F7D116"],
+      "saudi arabia": ["#006C35","#DDD9D2"],
+      "uruguay": ["#7BAFD4","#DDD9D2"],
+      "france": ["#002395","#DDD9D2","#ED2939"],
+      "senegal": ["#00853F","#FDEF42","#E31B23"],
+      "iraq": ["#CE1126","#DDD9D2","#000000"],
+      "norway": ["#BA0C2F","#DDD9D2","#00205B"],
+      "argentina": ["#75AADB","#DDD9D2","#75AADB"],
+      "algeria": ["#006233","#DDD9D2","#D21034"],
+      "austria": ["#ED2939","#DDD9D2","#ED2939"],
+      "jordan": ["#000000","#DDD9D2","#007A3D"],
+      "portugal": ["#006600","#FF0000"],
+      "dr congo": ["#007FFF","#F7D618","#CE1021"],
+      "uzbekistan": ["#0099B5","#DDD9D2","#1EB53A"],
+      "colombia": ["#FCD116","#003893","#CE1126"],
+      "england": ["#DDD9D2","#CE1126","#DDD9D2"],
+      "croatia": ["#FF0000","#DDD9D2","#171796"],
+      "ghana": ["#CE1126","#FCD116","#006B3F"],
+      "panama": ["#DA121A","#DDD9D2","#072357"]
+    };
+    const DRAW_EDGE = "linear-gradient(to bottom, #E8C25A, #D4A53C)";
+
+    function teamEdge(name) {
+      if (!name) return "#E6DDD3";
+      if (String(name).toLowerCase() === "draw") return DRAW_EDGE;
+      const cols = TEAM_COLORS[String(name).toLowerCase().trim()];
+      if (!cols) return "linear-gradient(to bottom, #F0A86F, #E8602C)";
+      if (cols.length === 2) return `linear-gradient(to bottom, ${cols[0]} 50%, ${cols[1]} 50%)`;
+      return `linear-gradient(to bottom, ${cols[0]} 33%, ${cols[1]} 33%, ${cols[1]} 66%, ${cols[2]} 66%)`;
+    }
+
+    // Player name -> headshot URL, from all loaded props rows
+    function scorerImageFor(name) {
+      if (!name || !state.props) return "";
+      const n = String(name).toLowerCase().trim();
+      for (const row of state.props) {
+        for (const k of ["1","2","3"]) {
+          const sn = String(row["Scorer " + k] || "").toLowerCase().trim();
+          if (sn && (sn === n || sn.indexOf(n) !== -1 || n.indexOf(sn) !== -1)) {
+            const url = row["Scorer " + k + " URL"] || "";
+            if (url) return url;
+          }
+        }
+      }
+      return "";
+    }
+
+    function facePillHTML(name) {
+      const url = scorerImageFor(name);
+      if (url) return '<span class="pface"><img src="' + esc(url) + '" alt=""></span>';
+      return '<span class="pface">' + esc(scorerInitials(name || "")) + '</span>';
+    }
+
     function matchKey(r) {
       return (r.Home || "") + "|" + (r.Away || "");
     }
@@ -3022,7 +3166,7 @@
                 if (status === "live") return '<span class="game-badge live">● Live</span>';
                 return '<span class="game-badge open" id="gct-' + id + '"' + (kickoff ? ' data-ko="' + kickoff.getTime() + '"' : '') + '>' + ((kickoff && timeUntil(kickoff)) || r.Time || r.Kickoff || 'Scheduled') + '</span>';
               })()}
-              <span style="font-weight:600;color:${isComplete ? (state.submitted ? "#16a34a" : "#2563eb") : "#d97706"};">${(() => {
+              <span style="font-weight:600;color:${isComplete ? (state.submitted ? "#16a34a" : "#B8863B") : "#d97706"};">${(() => {
                   const _ko = parseKickoff(r.Time || r.Kickoff || "", r.Date || "");
                   const st = gameStatus(_ko);
                   if (st === "open") return isComplete ? (state.submitted ? "Submitted ✓" : "Ready") : "Not picked";
@@ -3033,18 +3177,18 @@
           </div>
 
           <div class="hide-closed">
-            <div style="font-size:12px;font-weight:800;color:#6b7280;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">Pick the winner</div>
+            <div style="font-size:12px;font-weight:800;color:#6b7280;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">Pick the Match Winner</div>
             <div class="prob-row">
               <button class="prob ${picked.result === home ? "active" : ""}" data-result="${esc(home)}"><div class="flag">${getFlag(home)}</div><div class="pct">${esc(hPct)}</div><div class="team-code">${esc(home)}</div></button>
-              <button class="prob ${picked.result === "Draw" ? "active" : ""}" data-result="Draw"><div class="flag">🤝</div><div class="pct">${esc(dPct)}</div><div class="team-code">Draw</div></button>
+              <button class="prob ${picked.result === "Draw" ? "active" : ""}" data-result="Draw"><div class="flag draw-eq">=</div><div class="pct">${esc(dPct)}</div><div class="team-code">Draw</div></button>
               <button class="prob ${picked.result === away ? "active" : ""}" data-result="${esc(away)}"><div class="flag">${getFlag(away)}</div><div class="pct">${esc(aPct)}</div><div class="team-code">${esc(away)}</div></button>
             </div>
 
-            <div class="insight">↗ Most likely outcome: <strong>${esc(favorite)}</strong></div>
+            <div class="crowd-caption">% of picks so far</div>
 
             
 
-            <div class="scorer-title"><span>Pick Top Scorer (+1 Point)</span><span>required · pick one</span></div>
+            <div class="scorer-title"><span>Pick a Goalscorer · +1 pt</span></div>
             <div class="scorers">
               ${scorers.map((s,idx) => `
                 <button class="scorer ${picked.scorer === s.name ? "active" : ""}" data-scorer="${esc(s.name)}">
@@ -3061,22 +3205,17 @@
 
           </div>
           ${isComplete && !isOpen ? `
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;background:#f0fdf4;border-radius:10px;overflow:hidden;margin-top:8px;">
-              <div style="display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border-right:1px solid #d1fae5;">
-                <span style="font-size:20px;">${picked.result === 'Draw' ? '🤝' : getFlag(picked.result.replace(' wins','').trim())}</span>
-                <div style="text-align:center;">
-                  <div style="font-size:10px;color:#6b7280;font-weight:700;text-transform:uppercase;letter-spacing:.05em;">Team</div>
-                  <div style="font-size:13px;font-weight:900;color:#111827;">${esc(picked.result)}</div>
-                </div>
-              </div>
-              <div style="display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;">
-                <span style="font-size:20px;">⚽</span>
-                <div style="text-align:center;">
-                  <div style="font-size:10px;color:#6b7280;font-weight:700;text-transform:uppercase;letter-spacing:.05em;">Scorer</div>
-                  <div style="font-size:13px;font-weight:900;color:#111827;">${esc(picked.scorer)}</div>
-                </div>
-              </div>
+            <div style="display:flex;gap:8px;margin-top:8px;">
+              <span class="ppill" style="flex:1;min-width:0;background:#E9F6EE;border:1px solid #CDE8D6;">
+                <span class="pedge" style="background:${teamEdge(picked.result)};"></span>
+                <span style="min-width:0;"><span style="display:block;font-size:9.5px;font-weight:800;letter-spacing:0.8px;color:#A6AAB2;">TEAM</span><span class="pval" style="display:block;">${esc(picked.result)}</span></span>
+              </span>
+              <span class="ppill" style="flex:1;min-width:0;background:#E9F6EE;border:1px solid #CDE8D6;">
+                ${facePillHTML(picked.scorer)}
+                <span style="min-width:0;"><span style="display:block;font-size:9.5px;font-weight:800;letter-spacing:0.8px;color:#A6AAB2;">SCORER</span><span class="pval" style="display:block;">${esc(picked.scorer)}</span></span>
+              </span>
             </div>
+            <div class="tap-hint">Tap to change your picks</div>
           ` : ""}
         </article>
       `;
